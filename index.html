@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caucasia Heavy-Import | Vibras Positivas HM</title>
+    <title>Caucasia Heavy-Import Hub | Vibras Positivas HM</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="manifest.json">
 </head>
@@ -11,50 +11,55 @@
     <header>
         <div class="logo-container">
             <h1>Caucasia Heavy-Import</h1>
-            <span>By Vibras Positivas HM</span>
+            <p>Ecosistema de Importación Directa China-Colombia</p>
         </div>
-        <div id="real-time-col"></div>
+        <div id="real-time-col">Cargando hora de Caucasia...</div>
     </header>
 
     <main>
-        <section class="calculator-card">
-            <h2>Calculadora de Importación China-Colombia 2026</h2>
+        <section class="card">
+            <h2>1. Liquidador de Importación (Leyes 2026)</h2>
             <div class="input-group">
-                <label>Valor FOB (USD) - Precio en China</label>
+                <label>Valor FOB (USD) - Precio en Fábrica China</label>
                 <input type="number" id="fobValue" placeholder="Ej: 50000">
             </div>
             <div class="input-group">
-                <label>Flete Internacional + Seguro (USD)</label>
+                <label>Flete + Seguro (USD) hasta Puerto Antioquia</label>
                 <input type="number" id="shippingValue" placeholder="Ej: 4500">
             </div>
             <div class="input-group">
-                <label>Tipo de Maquinaria</label>
+                <label>Partida Arancelaria / Tipo de Bien</label>
                 <select id="machineryType">
-                    <option value="standard">Maquinaria Amarilla / Agrícola (0-5% Arancel)</option>
-                    <option value="steel">Partes Siderúrgicas (Decreto 0264 - 35% Arancel)</option>
-                    <option value="industrial">Industrial General (10% Arancel)</option>
+                    <option value="standard">Maquinaria Amarilla (5% Arancel)</option>
+                    <option value="steel">Productos Siderúrgicos (35% Arancel - Dec. 0264)</option>
+                    <option value="industrial">Maquinaria Industrial (10% Arancel)</option>
+                    <option value="agri">Maquinaria Agrícola (0% Arancel)</option>
                 </select>
             </div>
-            <button onclick="calculateImport()">Calcular Liquidación Diaria</button>
+            <button class="btn-primary" onclick="calculateImport()">Calcular Impuestos DIAN</button>
+            <div id="results" class="results-box hidden"></div>
         </section>
 
-        <section id="results" class="results-card hidden">
-            <h3>Resultado de Liquidación (TRM estimada: $4,000 COP)</h3>
-            <div id="breakdown"></div>
+        <section class="card">
+            <h2>2. Catálogo Minero y Precios en Colombia</h2>
+            <p class="subtitle">Diferencia de costo: Importación Directa vs. Distribuidor Local</p>
+            <div id="catalog-list"></div>
         </section>
 
-        <section class="legal-notice">
-            <h4>📌 Marco Legal Vigente (Abril 2026)</h4>
-            <ul>
-                <li><strong>Decreto 0264 de 2026:</strong> Arancel del 35% para subpartidas siderúrgicas específicas.</li>
-                <li><strong>Puerto de Arribo sugerido:</strong> Puerto Antioquia (Urabá) - Conexión directa a Caucasia.</li>
-                <li><strong>Requisito:</strong> Registro VUCE y Certificado de Emisiones ANLA.</li>
-            </ul>
+        <section class="card">
+            <h2>3. Negociación con Fábricas Chinas</h2>
+            <p>Genera el correo técnico para solicitar cotizaciones (FOB) bajo normas ANLA 2026.</p>
+            <button class="btn-secondary" onclick="generateEmail()">Generar Formato de Negociación</button>
+            <div id="email-section" class="hidden">
+                <pre id="email-template"></pre>
+                <button class="btn-copy" onclick="copyEmail()">Copiar Correo</button>
+            </div>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2026 Todos los derechos reservados a <strong>Vibras Positivas HM</strong></p>
+        <p>Software Desarrollado por <strong>Vibras Positivas HM</strong> &copy; 2026</p>
+        <p>Caucasia, Antioquia, Bajo Cauca.</p>
     </footer>
 
     <script src="app.js"></script>
