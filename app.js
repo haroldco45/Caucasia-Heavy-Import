@@ -1,30 +1,22 @@
 /**
- * APP: Caucasia Heavy-Import
+ * APP: Caucasia Heavy-Import Hub
  * DEVELOPER: Vibras Positivas HM
  */
 
-// 1. Registro del Service Worker para PWA
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('PWA Operativa: Vibras Positivas HM'))
-            .catch(err => console.log('Error SW:', err));
-    });
-}
-
-// 2. Reloj en tiempo real (Caucasia, Colombia)
+// Sincronización Hora Colombia
 function updateClock() {
     const options = { timeZone: 'America/Bogota', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-    const now = new Date().toLocaleTimeString('es-CO', options);
-    document.getElementById('real-time-col').innerText = `Caucasia: ${now}`;
+    document.getElementById('real-time-col').innerText = `Caucasia: ${new Date().toLocaleTimeString('es-CO', options)}`;
 }
 setInterval(updateClock, 1000);
 
-// 3. Catálogo de Minería y Precios 2026
+// Catálogo Ampliado: Minería de Aluvión
 const catalog = [
-    { name: "Excavadora SANY SY215C", fob: 65000, cop: 450000000, link: "https://www.sanyglobal.com" },
-    { name: "Cargador XCMG LW300", fob: 32000, cop: 235000000, link: "https://www.xcmgglobal.com" },
-    { name: "Bulldozer Shantui SD16", fob: 48000, cop: 320000000, link: "https://www.shantui-global.com" }
+    { name: "Excavadora Brazo Largo XCMG XE210LL", fob: 82000, cop: 580000000, category: "Aluvión" },
+    { name: "Retro SANY SY215C", fob: 65000, cop: 450000000, category: "Estándar" },
+    { name: "Bulldozer Pantanero Shantui SD22W", fob: 115000, cop: 790000000, category: "Remoción" },
+    { name: "Draga de Succión 8'", fob: 45000, cop: 310000000, category: "Extracción" },
+    { name: "Planta de Lavado Trommel 50TPH", fob: 18000, cop: 125000000, category: "Lavado" }
 ];
 
 function loadCatalog() {
@@ -32,77 +24,56 @@ function loadCatalog() {
     list.innerHTML = catalog.map(p => `
         <div class="product-item">
             <div>
-                <strong>${p.name}</strong><br>
-                <small><a href="${p.link}" target="_blank">Visitar Fábrica</a></small>
+                <small style="color: var(--accent); font-weight: bold;">${p.category}</small>
+                <div style="font-weight: bold;">${p.name}</div>
             </div>
-            <div class="price-tag">
-                <span class="col-price">PVP Col: $${p.cop.toLocaleString()}</span><br>
+            <div style="text-align: right;">
+                <div style="color: var(--success); font-weight: bold;">PVP Col: $${p.cop.toLocaleString()}</div>
                 <small>FOB China: $${p.fob.toLocaleString()} USD</small>
             </div>
         </div>
     `).join('');
 }
 
-// 4. Calculadora de Importación Profesional
+// Calculadora
 function calculateImport() {
     const fob = parseFloat(document.getElementById('fobValue').value);
     const ship = parseFloat(document.getElementById('shippingValue').value);
     const type = document.getElementById('machineryType').value;
-    const trm = 4000; // TRM Estimada Abril 2026
+    const trm = 4000;
 
-    if (!fob || !ship) return alert("Ingrese valores válidos");
+    if (!fob || !ship) return alert("Por favor complete los datos.");
 
     let arancel = 0.05;
     if (type === 'steel') arancel = 0.35;
-    if (type === 'industrial') arancel = 0.10;
     if (type === 'agri') arancel = 0.0;
 
     const cif = fob + ship;
     const arancelVal = cif * arancel;
     const iva = (cif + arancelVal) * 0.19;
     const totalUsd = cif + arancelVal + iva;
-    const totalCop = totalUsd * trm;
 
     const res = document.getElementById('results');
     res.classList.remove('hidden');
     res.innerHTML = `
-        <h4>Liquidación Estimada:</h4>
-        <p>CIF (Costo + Seguro): $${cif.toLocaleString()} USD</p>
-        <p>Arancel (${arancel*100}%): $${arancelVal.toLocaleString()} USD</p>
-        <p>IVA (19%): $${iva.toLocaleString()} USD</p>
-        <hr>
-        <h3 style="color:#27ae60;">Total Nacionalizado: $${totalCop.toLocaleString()} COP</h3>
-        <p><small>*TRM aplicada: $4,000. Puerto de arribo: Urabá.</small></p>
+        <h3>Liquidación Estimada:</h3>
+        <p>CIF en Puerto: $${cif.toLocaleString()} USD</p>
+        <p>Impuestos (Arancel + IVA): $${(arancelVal + iva).toLocaleString()} USD</p>
+        <h2 style="color: var(--success);">TOTAL: $${(totalUsd * trm).toLocaleString()} COP</h2>
+        <p><small>*TRM: $${trm} | Puerto: Antioquia (Urabá)</small></p>
     `;
 }
 
-// 5. Generador de Correo de Negociación
+// Negociación
 function generateEmail() {
-    const template = `
-Subject: Purchase Inquiry - Heavy Machinery - Vibras Positivas HM (Colombia)
-
-Dear Sales Team,
-
-My name is [Your Name] from Vibras Positivas HM, located in Caucasia, Colombia. We are interested in importing the following machinery to Puerto Antioquia (Urabá):
-
-Product: [Insert Model]
-Requirement: 
-- Must comply with Colombian ANLA 2026 emission standards.
-- Quote in FOB terms.
-- Provide technical data sheet for customs classification.
-
-We are looking for a reliable supplier for our mining operations in the Bajo Cauca region.
-
-Best Regards,
-Vibras Positivas HM Team
-    `;
-    document.getElementById('email-template').innerText = template;
+    const body = `Subject: Inquiry for Mining Equipment - Vibras Positivas HM (Colombia)\n\nDear Sales Team,\n\nWe are Vibras Positivas HM, based in Caucasia, Colombia. We want to import [Model] for alluvial mining.\n\nRequirements:\n1. Tropical Kit for high temperatures.\n2. ANLA 2026 Emission Compliance.\n3. FOB Price Quote.\n\nBest regards,\nManagement Team\nVibras Positivas HM`;
+    document.getElementById('email-template').innerText = body;
     document.getElementById('email-section').classList.remove('hidden');
 }
 
 function copyEmail() {
-    const text = document.getElementById('email-template').innerText;
-    navigator.clipboard.writeText(text).then(() => alert("Correo copiado. ¡Listo para enviar!"));
+    navigator.clipboard.writeText(document.getElementById('email-template').innerText);
+    alert("Copiado al portapapeles.");
 }
 
-window.onload = () => { loadCatalog(); updateClock(); };
+window.onload = () => { updateClock(); loadCatalog(); };
