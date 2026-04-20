@@ -11,45 +11,61 @@
     <header>
         <div class="logo-container">
             <h1>Caucasia Heavy-Import</h1>
-            <p>Ecosistema de Importación Directa China-Colombia</p>
+            <p>Minería de Aluvión & Maquinaria Pesada</p>
         </div>
-        <div id="real-time-col">Cargando hora de Caucasia...</div>
+        <div id="real-time-col">Cargando hora de Colombia...</div>
     </header>
 
     <main>
         <section class="card">
             <h2>1. Liquidador de Importación (Leyes 2026)</h2>
             <div class="input-group">
-                <label>Valor FOB (USD) - Precio en Fábrica China</label>
-                <input type="number" id="fobValue" placeholder="Ej: 50000">
+                <label>Valor FOB (USD) - Precio Fábrica China</label>
+                <input type="number" id="fobValue" placeholder="Ej: 85000">
             </div>
             <div class="input-group">
-                <label>Flete + Seguro (USD) hasta Puerto Antioquia</label>
-                <input type="number" id="shippingValue" placeholder="Ej: 4500">
+                <label>Logística + Seguro (USD) a Puerto Antioquia</label>
+                <input type="number" id="shippingValue" placeholder="Ej: 5000">
             </div>
             <div class="input-group">
-                <label>Partida Arancelaria / Tipo de Bien</label>
+                <label>Clasificación Aduanera</label>
                 <select id="machineryType">
-                    <option value="standard">Maquinaria Amarilla (5% Arancel)</option>
-                    <option value="steel">Productos Siderúrgicos (35% Arancel - Dec. 0264)</option>
-                    <option value="industrial">Maquinaria Industrial (10% Arancel)</option>
-                    <option value="agri">Maquinaria Agrícola (0% Arancel)</option>
+                    <option value="standard">Excavadoras/Retros (5% Arancel)</option>
+                    <option value="steel">Estructuras Acero (35% Arancel - Dec. 0264)</option>
+                    <option value="agri">Equipos de Lavado/Trommels (0% Arancel)</option>
                 </select>
             </div>
-            <button class="btn-primary" onclick="calculateImport()">Calcular Impuestos DIAN</button>
+            <button class="btn-primary" onclick="calculateImport()">Calcular Costos de Nacionalización</button>
             <div id="results" class="results-box hidden"></div>
         </section>
 
         <section class="card">
-            <h2>2. Catálogo Minero y Precios en Colombia</h2>
-            <p class="subtitle">Diferencia de costo: Importación Directa vs. Distribuidor Local</p>
+            <h2>2. Catálogo Especializado Minería de Aluvión</h2>
+            <p class="subtitle">Equipos sugeridos para el Bajo Cauca (Importación Directa vs Local)</p>
             <div id="catalog-list"></div>
         </section>
 
+        <section class="card advice-card">
+            <h2>3. Sugerencias Técnicas de Vibras Positivas HM</h2>
+            <div class="advice-grid">
+                <div class="advice-item">
+                    <h4>🌡️ Tropical Kit</h4>
+                    <p>Exija a la fábrica radiadores de alta capacidad y aire acondicionado reforzado para el clima de Caucasia.</p>
+                </div>
+                <div class="advice-item">
+                    <h4>📡 GPS Obligatorio</h4>
+                    <p>Toda maquinaria pesada en Colombia debe estar registrada y monitoreada por la Policía Nacional.</p>
+                </div>
+                <div class="advice-item">
+                    <h4>⚓ Ruta Logística</h4>
+                    <p>Priorice la entrada por Puerto Antioquia (Urabá) para reducir el flete terrestre un 25%.</p>
+                </div>
+            </div>
+        </section>
+
         <section class="card">
-            <h2>3. Negociación con Fábricas Chinas</h2>
-            <p>Genera el correo técnico para solicitar cotizaciones (FOB) bajo normas ANLA 2026.</p>
-            <button class="btn-secondary" onclick="generateEmail()">Generar Formato de Negociación</button>
+            <h2>4. Negociación con Fábrica</h2>
+            <button class="btn-secondary" onclick="generateEmail()">Generar Correo de Cotización (Inglés)</button>
             <div id="email-section" class="hidden">
                 <pre id="email-template"></pre>
                 <button class="btn-copy" onclick="copyEmail()">Copiar Correo</button>
@@ -58,8 +74,7 @@
     </main>
 
     <footer>
-        <p>Software Desarrollado por <strong>Vibras Positivas HM</strong> &copy; 2026</p>
-        <p>Caucasia, Antioquia, Bajo Cauca.</p>
+        <p>Desarrollado por <strong>Vibras Positivas HM</strong> &copy; 2026</p>
     </footer>
 
     <script src="app.js"></script>
