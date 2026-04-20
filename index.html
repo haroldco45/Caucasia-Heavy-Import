@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caucasia Heavy-Import | Vibras Positivas HM</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <h1>Caucasia Heavy-Import</h1>
+            <span>By Vibras Positivas HM</span>
+        </div>
+        <div id="real-time-col"></div>
+    </header>
+
+    <main>
+        <section class="calculator-card">
+            <h2>Calculadora de Importación China-Colombia 2026</h2>
+            <div class="input-group">
+                <label>Valor FOB (USD) - Precio en China</label>
+                <input type="number" id="fobValue" placeholder="Ej: 50000">
+            </div>
+            <div class="input-group">
+                <label>Flete Internacional + Seguro (USD)</label>
+                <input type="number" id="shippingValue" placeholder="Ej: 4500">
+            </div>
+            <div class="input-group">
+                <label>Tipo de Maquinaria</label>
+                <select id="machineryType">
+                    <option value="standard">Maquinaria Amarilla / Agrícola (0-5% Arancel)</option>
+                    <option value="steel">Partes Siderúrgicas (Decreto 0264 - 35% Arancel)</option>
+                    <option value="industrial">Industrial General (10% Arancel)</option>
+                </select>
+            </div>
+            <button onclick="calculateImport()">Calcular Liquidación Diaria</button>
+        </section>
+
+        <section id="results" class="results-card hidden">
+            <h3>Resultado de Liquidación (TRM estimada: $4,000 COP)</h3>
+            <div id="breakdown"></div>
+        </section>
+
+        <section class="legal-notice">
+            <h4>📌 Marco Legal Vigente (Abril 2026)</h4>
+            <ul>
+                <li><strong>Decreto 0264 de 2026:</strong> Arancel del 35% para subpartidas siderúrgicas específicas.</li>
+                <li><strong>Puerto de Arribo sugerido:</strong> Puerto Antioquia (Urabá) - Conexión directa a Caucasia.</li>
+                <li><strong>Requisito:</strong> Registro VUCE y Certificado de Emisiones ANLA.</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Todos los derechos reservados a <strong>Vibras Positivas HM</strong></p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
