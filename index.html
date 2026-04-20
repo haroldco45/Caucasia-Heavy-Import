@@ -4,79 +4,1405 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caucasia Heavy-Import Hub | Vibras Positivas HM</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700&family=Barlow+Condensed:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --gold: #D4A017;
+            --gold-light: #F0C040;
+            --gold-dim: #8B6914;
+            --dark: #0A0A0A;
+            --dark2: #111111;
+            --dark3: #1A1A1A;
+            --dark4: #242424;
+            --dark5: #2E2E2E;
+            --text: #E8E0D0;
+            --text-dim: #A09880;
+            --accent-red: #C0392B;
+            --accent-green: #27AE60;
+            --accent-blue: #2980B9;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Barlow', sans-serif;
+            background: var(--dark);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ── FONDO TEXTURA ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(212,160,23,0.03) 40px, rgba(212,160,23,0.03) 41px),
+                repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(212,160,23,0.03) 40px, rgba(212,160,23,0.03) 41px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── HEADER ── */
+        header {
+            position: relative;
+            background: linear-gradient(135deg, #0D0D0D 0%, #1A1200 50%, #0D0D0D 100%);
+            border-bottom: 3px solid var(--gold);
+            padding: 0;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .header-bg-text {
+            position: absolute;
+            top: -10px;
+            left: -20px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 160px;
+            color: rgba(212,160,23,0.04);
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: 8px;
+            line-height: 1;
+        }
+
+        .header-inner {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 28px 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .header-icon {
+            font-size: 44px;
+            line-height: 1;
+            filter: drop-shadow(0 0 12px rgba(212,160,23,0.5));
+        }
+
+        .header-titles h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 32px;
+            letter-spacing: 3px;
+            color: var(--gold-light);
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(212,160,23,0.4);
+        }
+
+        .header-titles p {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 13px;
+            letter-spacing: 4px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .header-meta {
+            text-align: right;
+        }
+
+        #real-time-col {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 13px;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(212,160,23,0.15);
+            border: 1px solid rgba(212,160,23,0.3);
+            color: var(--gold-light);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 2px;
+            margin-top: 6px;
+        }
+
+        /* ── NAV TABS ── */
+        .nav-tabs {
+            display: flex;
+            background: var(--dark2);
+            border-bottom: 1px solid rgba(212,160,23,0.2);
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-tabs::-webkit-scrollbar { display: none; }
+
+        .nav-tab {
+            flex-shrink: 0;
+            padding: 14px 18px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s;
+            white-space: nowrap;
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+
+        .nav-tab.active {
+            color: var(--gold-light);
+            border-bottom-color: var(--gold);
+            background: rgba(212,160,23,0.05);
+        }
+
+        .nav-tab:hover:not(.active) {
+            color: var(--text);
+            background: rgba(255,255,255,0.03);
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            display: none;
+            padding: 20px 16px 40px;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section.active { display: block; }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 26px;
+            letter-spacing: 3px;
+            color: var(--gold-light);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title .icon { font-size: 22px; }
+
+        .section-subtitle {
+            font-size: 12px;
+            color: var(--text-dim);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(212,160,23,0.15);
+        }
+
+        /* ── CARDS ── */
+        .card {
+            background: var(--dark3);
+            border: 1px solid rgba(212,160,23,0.15);
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), transparent);
+        }
+
+        .card h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold-light);
+            margin-bottom: 14px;
+        }
+
+        /* ── FORMULARIOS ── */
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: var(--dark4);
+            border: 1px solid rgba(212,160,23,0.2);
+            border-radius: 3px;
+            color: var(--text);
+            font-family: 'Barlow', sans-serif;
+            font-size: 14px;
+            padding: 10px 14px;
+            outline: none;
+            transition: border-color 0.2s;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            background: var(--dark5);
+        }
+
+        .form-group select option {
+            background: var(--dark4);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+        /* ── BOTONES ── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dim));
+            color: #0A0A0A;
+        }
+
+        .btn-gold:hover {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            transform: translateY(-1px);
+            box-shadow: 0 4px 20px rgba(212,160,23,0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+        }
+
+        .btn-outline:hover {
+            background: rgba(212,160,23,0.1);
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 11px;
+            width: auto;
+        }
+
+        .btn-copy {
+            background: var(--dark5);
+            border: 1px solid rgba(212,160,23,0.3);
+            color: var(--gold);
+            padding: 8px 16px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .btn-copy:hover { background: rgba(212,160,23,0.15); }
+
+        /* ── RESULTADOS LIQUIDADOR ── */
+        .results-box {
+            margin-top: 16px;
+            background: var(--dark4);
+            border: 1px solid rgba(212,160,23,0.3);
+            border-radius: 4px;
+            padding: 16px;
+        }
+
+        .results-box.hidden { display: none; }
+
+        .result-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 13px;
+        }
+
+        .result-line:last-child { border-bottom: none; }
+
+        .result-label { color: var(--text-dim); }
+        .result-value { font-weight: 600; color: var(--text); font-family: 'Barlow Condensed', sans-serif; font-size: 15px; }
+        .result-total .result-label { color: var(--gold); font-weight: 700; font-size: 14px; }
+        .result-total .result-value { color: var(--gold-light); font-size: 20px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 2px; }
+
+        .alert-box {
+            background: rgba(192,57,43,0.15);
+            border: 1px solid rgba(192,57,43,0.4);
+            border-radius: 3px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #E74C3C;
+            margin-top: 12px;
+        }
+
+        .info-box {
+            background: rgba(41,128,185,0.1);
+            border: 1px solid rgba(41,128,185,0.3);
+            border-radius: 3px;
+            padding: 10px 14px;
+            font-size: 12px;
+            color: #5DADE2;
+            margin-top: 10px;
+        }
+
+        /* ── CATÁLOGO ── */
+        .catalog-filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .filter-btn {
+            padding: 6px 14px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            background: var(--dark4);
+            border: 1px solid rgba(212,160,23,0.2);
+            color: var(--text-dim);
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: rgba(212,160,23,0.15);
+            border-color: var(--gold);
+            color: var(--gold-light);
+        }
+
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .cat-item {
+            background: var(--dark4);
+            border: 1px solid rgba(212,160,23,0.12);
+            border-radius: 4px;
+            padding: 16px;
+            position: relative;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+
+        .cat-item:hover {
+            border-color: rgba(212,160,23,0.35);
+            transform: translateY(-1px);
+        }
+
+        .cat-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .cat-item-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+
+        .cat-badge {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 3px 8px;
+            border-radius: 2px;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+
+        .badge-china { background: rgba(192,57,43,0.25); color: #E74C3C; border: 1px solid rgba(192,57,43,0.4); }
+        .badge-local { background: rgba(39,174,96,0.2); color: #2ECC71; border: 1px solid rgba(39,174,96,0.3); }
+        .badge-trommel { background: rgba(41,128,185,0.2); color: #5DADE2; border: 1px solid rgba(41,128,185,0.3); }
+
+        .cat-item-desc {
+            font-size: 13px;
+            color: var(--text-dim);
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .cat-item-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .spec-tag {
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: rgba(212,160,23,0.08);
+            border: 1px solid rgba(212,160,23,0.15);
+            color: var(--gold-dim);
+            padding: 3px 8px;
+            border-radius: 2px;
+        }
+
+        .cat-item-price {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price-range {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+        }
+
+        .price-label {
+            font-size: 10px;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .arancel-tag {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .arancel-0 { color: #2ECC71; }
+        .arancel-5 { color: var(--gold); }
+        .arancel-35 { color: #E74C3C; }
+
+        /* ── GUÍA MINERÍA ── */
+        .guide-section {
+            margin-bottom: 20px;
+        }
+
+        .guide-section h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guide-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (max-width: 500px) { .guide-grid { grid-template-columns: 1fr; } }
+
+        .guide-card {
+            background: var(--dark4);
+            border: 1px solid rgba(212,160,23,0.12);
+            border-radius: 4px;
+            padding: 14px;
+        }
+
+        .guide-card .gc-icon { font-size: 24px; margin-bottom: 8px; }
+        .guide-card .gc-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+        .guide-card .gc-text { font-size: 12px; color: var(--text-dim); line-height: 1.5; }
+
+        .process-steps {
+            counter-reset: steps;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 14px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            counter-increment: steps;
+            width: 30px;
+            height: 30px;
+            background: rgba(212,160,23,0.2);
+            border: 1px solid var(--gold-dim);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .step-content .step-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .step-content .step-desc {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.5;
+        }
+
+        /* ── ROI CALCULATOR ── */
+        .roi-output {
+            background: var(--dark4);
+            border: 1px solid rgba(39,174,96,0.3);
+            border-radius: 4px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+
+        .roi-output.hidden { display: none; }
+
+        .roi-metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 13px;
+        }
+
+        .roi-metric:last-child { border-bottom: none; }
+        .roi-lbl { color: var(--text-dim); }
+        .roi-val { font-family: 'Barlow Condensed', sans-serif; font-size: 16px; font-weight: 700; color: #2ECC71; }
+        .roi-val.warning { color: var(--gold); }
+        .roi-val.danger { color: #E74C3C; }
+
+        /* ── EMAIL GENERATOR ── */
+        .email-box {
+            background: var(--dark4);
+            border: 1px solid rgba(212,160,23,0.2);
+            border-radius: 4px;
+            padding: 14px;
+            font-size: 12px;
+            line-height: 1.7;
+            color: var(--text);
+            white-space: pre-wrap;
+            font-family: 'Barlow', sans-serif;
+            margin-top: 12px;
+        }
+
+        .email-box.hidden { display: none; }
+
+        /* ── NORMATIVA ── */
+        .norm-item {
+            background: var(--dark4);
+            border-left: 3px solid var(--gold);
+            padding: 14px 16px;
+            margin-bottom: 10px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .norm-item .norm-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--gold-light);
+            margin-bottom: 6px;
+        }
+
+        .norm-item .norm-desc {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        .norm-item.warning { border-left-color: #E74C3C; }
+        .norm-item.info { border-left-color: var(--accent-blue); }
+
+        /* ── PROVEEDORES ── */
+        .supplier-card {
+            background: var(--dark4);
+            border: 1px solid rgba(212,160,23,0.12);
+            border-radius: 4px;
+            padding: 16px;
+            margin-bottom: 10px;
+        }
+
+        .supplier-card .sup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .supplier-card .sup-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+
+        .sup-country {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: rgba(212,160,23,0.1);
+            border: 1px solid rgba(212,160,23,0.2);
+            color: var(--gold);
+            padding: 2px 8px;
+            border-radius: 2px;
+        }
+
+        .supplier-card .sup-desc {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        .sup-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+
+        /* ── GLOSARIO ── */
+        .glossary-item {
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .glossary-item:last-child { border-bottom: none; }
+
+        .glossary-term {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--gold-light);
+            margin-bottom: 4px;
+        }
+
+        .glossary-def {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.6;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--dark2);
+            border-top: 1px solid rgba(212,160,23,0.15);
+            text-align: center;
+            padding: 16px;
+            font-size: 11px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        footer strong { color: var(--gold); }
+
+        /* ── MISC ── */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(212,160,23,0.3), transparent);
+            margin: 20px 0;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin: 8px 0;
+        }
+
+        .tip-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (max-width: 480px) { .tip-grid { grid-template-columns: 1fr; } }
+
+        .tip-card {
+            background: rgba(212,160,23,0.06);
+            border: 1px solid rgba(212,160,23,0.15);
+            border-radius: 4px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .tip-card .tip-icon { font-size: 24px; margin-bottom: 6px; }
+        .tip-card .tip-title { font-size: 12px; font-weight: 700; color: var(--gold-light); margin-bottom: 4px; }
+        .tip-card .tip-text { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+
+        .animate-in {
+            animation: fadeUp 0.35s ease both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Scroll suave */
+        html { scroll-behavior: smooth; }
+
+        .hidden { display: none; }
+
+        .success-badge {
+            display: inline-block;
+            background: rgba(39,174,96,0.2);
+            border: 1px solid rgba(39,174,96,0.4);
+            color: #2ECC71;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            padding: 2px 8px;
+            border-radius: 2px;
+            text-transform: uppercase;
+            vertical-align: middle;
+            margin-left: 8px;
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <h1>Caucasia Heavy-Import</h1>
-            <p>Minería de Aluvión & Maquinaria Pesada</p>
-        </div>
-        <div id="real-time-col">Cargando hora de Colombia...</div>
-    </header>
 
-    <main>
-        <section class="card">
-            <h2>1. Liquidador de Importación (Leyes 2026)</h2>
-            <div class="input-group">
-                <label>Valor FOB (USD) - Precio Fábrica China</label>
-                <input type="number" id="fobValue" placeholder="Ej: 85000">
+<!-- HEADER -->
+<header>
+    <div class="header-bg-text">MINERÍA</div>
+    <div class="header-inner">
+        <div class="header-brand">
+            <div class="header-icon">🏗️</div>
+            <div class="header-titles">
+                <h1>Caucasia Heavy-Import</h1>
+                <p>Minería de Aluvión & Maquinaria Pesada — Bajo Cauca</p>
             </div>
-            <div class="input-group">
-                <label>Logística + Seguro (USD) a Puerto Antioquia</label>
-                <input type="number" id="shippingValue" placeholder="Ej: 5000">
+        </div>
+        <div class="header-meta">
+            <div id="real-time-col">Cargando...</div>
+            <div class="header-badge">Vibras Positivas HM · 2026</div>
+        </div>
+    </div>
+</header>
+
+<!-- NAV -->
+<nav class="nav-tabs" id="navTabs">
+    <button class="nav-tab active" onclick="showSection('liquidador', this)">⚙️ Liquidador</button>
+    <button class="nav-tab" onclick="showSection('catalogo', this)">📦 Catálogo</button>
+    <button class="nav-tab" onclick="showSection('roi', this)">📈 ROI</button>
+    <button class="nav-tab" onclick="showSection('guia', this)">📚 Guía</button>
+    <button class="nav-tab" onclick="showSection('normativa', this)">⚖️ Legal</button>
+    <button class="nav-tab" onclick="showSection('proveedores', this)">🌏 Proveedores</button>
+    <button class="nav-tab" onclick="showSection('email', this)">✉️ Cotización</button>
+    <button class="nav-tab" onclick="showSection('glosario', this)">📖 Glosario</button>
+</nav>
+
+<!-- ══════════════════ SECCIÓN 1: LIQUIDADOR ══════════════════ -->
+<section class="section active animate-in" id="sec-liquidador">
+    <div class="section-title"><span class="icon">⚙️</span> Liquidador de Importación</div>
+    <div class="section-subtitle">Cálculo de costos de nacionalización · Aduanas Colombia 2026</div>
+
+    <div class="card">
+        <h3>Datos del Equipo</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Valor FOB (USD) — Precio en Fábrica China</label>
+                <input type="number" id="fobValue" placeholder="Ej: 85000" min="0">
             </div>
-            <div class="input-group">
-                <label>Clasificación Aduanera</label>
+            <div class="form-group">
+                <label>Flete + Seguro (USD) a Puerto Antioquia</label>
+                <input type="number" id="shippingValue" placeholder="Ej: 5000" min="0">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Clasificación Arancelaria</label>
                 <select id="machineryType">
-                    <option value="standard">Excavadoras/Retros (5% Arancel)</option>
-                    <option value="steel">Estructuras Acero (35% Arancel - Dec. 0264)</option>
-                    <option value="agri">Equipos de Lavado/Trommels (0% Arancel)</option>
+                    <option value="excavadora">🦺 Excavadoras / Retroexcavadoras (Arancel 5%)</option>
+                    <option value="trommel">🌀 Trommels / Equipos de Lavado (Arancel 0%)</option>
+                    <option value="dragas">⚓ Dragas / Balsas Mineras (Arancel 5%)</option>
+                    <option value="bombas">💧 Bombas de Succión y Dragado (Arancel 0%)</option>
+                    <option value="compresores">🔧 Compresores Industriales (Arancel 5%)</option>
+                    <option value="acero">🏗️ Estructuras de Acero (Arancel 35% — Dec. 0264)</option>
+                    <option value="camiones">🚛 Volquetas / Camiones Pesados (Arancel 35%)</option>
+                    <option value="plantas">⚡ Plantas Eléctricas Diésel (Arancel 5%)</option>
                 </select>
             </div>
-            <button class="btn-primary" onclick="calculateImport()">Calcular Costos de Nacionalización</button>
-            <div id="results" class="results-box hidden"></div>
-        </section>
+            <div class="form-group">
+                <label>Tasa de Cambio (COP por USD)</label>
+                <input type="number" id="tasaCambio" placeholder="Ej: 4200" value="4200" min="0">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Gastos Agente Aduanero (USD) — Opcional</label>
+            <input type="number" id="agenteAduanero" placeholder="Ej: 800">
+        </div>
+        <button class="btn btn-gold" onclick="calculateImport()">⚙️ Calcular Costos de Nacionalización</button>
+        <div id="results" class="results-box hidden"></div>
+    </div>
 
-        <section class="card">
-            <h2>2. Catálogo Especializado Minería de Aluvión</h2>
-            <p class="subtitle">Equipos sugeridos para el Bajo Cauca (Importación Directa vs Local)</p>
-            <div id="catalog-list"></div>
-        </section>
-
-        <section class="card advice-card">
-            <h2>3. Sugerencias Técnicas de Vibras Positivas HM</h2>
-            <div class="advice-grid">
-                <div class="advice-item">
-                    <h4>🌡️ Tropical Kit</h4>
-                    <p>Exija a la fábrica radiadores de alta capacidad y aire acondicionado reforzado para el clima de Caucasia.</p>
-                </div>
-                <div class="advice-item">
-                    <h4>📡 GPS Obligatorio</h4>
-                    <p>Toda maquinaria pesada en Colombia debe estar registrada y monitoreada por la Policía Nacional.</p>
-                </div>
-                <div class="advice-item">
-                    <h4>⚓ Ruta Logística</h4>
-                    <p>Priorice la entrada por Puerto Antioquia (Urabá) para reducir el flete terrestre un 25%.</p>
+    <div class="card">
+        <h3>ℹ️ ¿Cómo funciona el cálculo?</h3>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-title">Base Gravable (CIF)</div>
+                    <div class="step-desc">FOB + Flete + Seguro. Esta es la base sobre la que se aplican todos los tributos aduaneros.</div>
                 </div>
             </div>
-        </section>
-
-        <section class="card">
-            <h2>4. Negociación con Fábrica</h2>
-            <button class="btn-secondary" onclick="generateEmail()">Generar Correo de Cotización (Inglés)</button>
-            <div id="email-section" class="hidden">
-                <pre id="email-template"></pre>
-                <button class="btn-copy" onclick="copyEmail()">Copiar Correo</button>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-title">Arancel de Importación</div>
+                    <div class="step-desc">Depende de la posición arancelaria del equipo. Va del 0% (trommels) al 35% (camiones).</div>
+                </div>
             </div>
-        </section>
-    </main>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-title">IVA (19%)</div>
+                    <div class="step-desc">Se aplica sobre CIF + Arancel. Recuperable si la empresa está en régimen común con RUT activo.</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <div class="step-title">Gastos Adicionales</div>
+                    <div class="step-desc">Agente aduanero, bodegaje, transporte interno, INVIMA si aplica, inspecciones DIAN.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-    <footer>
-        <p>Desarrollado por <strong>Vibras Positivas HM</strong> &copy; 2026</p>
-    </footer>
+<!-- ══════════════════ SECCIÓN 2: CATÁLOGO ══════════════════ -->
+<section class="section animate-in" id="sec-catalogo">
+    <div class="section-title"><span class="icon">📦</span> Catálogo Especializado</div>
+    <div class="section-subtitle">Maquinaria para minería de aluvión · Bajo Cauca Antioqueño</div>
 
-    <script src="app.js"></script>
+    <div class="catalog-filters">
+        <button class="filter-btn active" onclick="filterCatalog('all', this)">Todo</button>
+        <button class="filter-btn" onclick="filterCatalog('excavacion', this)">Excavación</button>
+        <button class="filter-btn" onclick="filterCatalog('lavado', this)">Lavado/Clasificación</button>
+        <button class="filter-btn" onclick="filterCatalog('dragado', this)">Dragado</button>
+        <button class="filter-btn" onclick="filterCatalog('soporte', this)">Soporte</button>
+    </div>
+
+    <div class="catalog-grid" id="catalog-list"></div>
+</section>
+
+<!-- ══════════════════ SECCIÓN 3: ROI ══════════════════ -->
+<section class="section animate-in" id="sec-roi">
+    <div class="section-title"><span class="icon">📈</span> Calculadora de Retorno</div>
+    <div class="section-subtitle">Proyección de rentabilidad y recuperación de inversión</div>
+
+    <div class="card">
+        <h3>Variables del Proyecto</h3>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Inversión Total COP (incluye maquinaria)</label>
+                <input type="number" id="roiInversion" placeholder="Ej: 500000000">
+            </div>
+            <div class="form-group">
+                <label>Gramos de Oro Producidos / Mes (gr)</label>
+                <input type="number" id="roiGramos" placeholder="Ej: 400">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Precio Oro Comprador Local (COP/gr)</label>
+                <input type="number" id="roiPrecioOro" placeholder="Ej: 380000" value="380000">
+            </div>
+            <div class="form-group">
+                <label>Costos Operativos / Mes (COP)</label>
+                <input type="number" id="roiCostos" placeholder="Ej: 80000000">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>% Regalías Mineras (Ley 685/2001)</label>
+                <input type="number" id="roiRegalias" placeholder="4" value="4">
+            </div>
+            <div class="form-group">
+                <label>Meses de Temporada Alta / Año</label>
+                <input type="number" id="roiMeses" placeholder="8" value="8">
+            </div>
+        </div>
+        <button class="btn btn-gold" onclick="calcROI()">📊 Calcular Rentabilidad</button>
+        <div class="roi-output hidden" id="roi-output"></div>
+    </div>
+
+    <div class="card">
+        <h3>💡 Factores clave del Bajo Cauca</h3>
+        <div class="tip-grid">
+            <div class="tip-card">
+                <div class="tip-icon">🌧️</div>
+                <div class="tip-title">Temporadas</div>
+                <div class="tip-text">Invierno (sep–nov) y verano (dic–mar) afectan el caudal de los ríos y la producción de oro.</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">💰</div>
+                <div class="tip-title">Precio Referencia</div>
+                <div class="tip-text">El precio de compra local suele ser 10–15% inferior al precio internacional de la LBMA.</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">⚠️</div>
+                <div class="tip-title">Regalías ANM</div>
+                <div class="tip-text">Sin título minero vigente, la producción es ilegal y sujeta a decomiso e investigación penal.</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">🔧</div>
+                <div class="tip-title">Mantenimiento</div>
+                <div class="tip-text">Reserve entre 8–12% del valor de la maquinaria al año en repuestos y mantenimiento preventivo.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════ SECCIÓN 4: GUÍA ══════════════════ -->
+<section class="section animate-in" id="sec-guia">
+    <div class="section-title"><span class="icon">📚</span> Guía Operativa</div>
+    <div class="section-subtitle">Proceso completo · Importación + Operación en el Bajo Cauca</div>
+
+    <div class="card">
+        <h3>🚢 Proceso de Importación desde China</h3>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-title">Selección del Proveedor en Alibaba / Made-in-China</div>
+                    <div class="step-desc">Verifique que el proveedor tenga certificación ISO 9001, al menos 3 años de exportaciones, y muestre inspecciones de terceros. Solicite siempre el catálogo técnico con especificaciones en kW, caudal m³/h, y peso en toneladas.</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-title">Negociación y Contrato</div>
+                    <div class="step-desc">Negocie en términos FOB (Free on Board) + puerto de embarque China. Exija factura comercial (Commercial Invoice), lista de empaque (Packing List), y certificado de origen para acceder a beneficios del TLC Colombia-China si aplica.</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-title">Pago Internacional</div>
+                    <div class="step-desc">Use carta de crédito (L/C) para montos mayores a USD 50.000 o T/T (transferencia) con 30% anticipo y 70% contra B/L. Registre la operación cambiaria ante el Banco de la República (Declaración de Cambio).</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">4</div>
+                <div class="step-content">
+                    <div class="step-title">Transporte Marítimo</div>
+                    <div class="step-desc">Rutas más usadas: Shanghai / Guangzhou → Puerto Antioquia (Urabá) — tránsito 28–35 días. O Puerto Buenaventura (+ 3 días transporte terrestre a Caucasia). Solicite seguro marítimo equivalente al 110% del CIF.</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">5</div>
+                <div class="step-content">
+                    <div class="step-title">Nacionalización en Aduana</div>
+                    <div class="step-desc">Contrate un agente aduanero autorizado por la DIAN. Documentos: B/L, factura comercial, lista de empaque, certificado de origen, póliza de seguro, y declaración andina de valor. Tiempo promedio de trámite: 5–10 días hábiles.</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">6</div>
+                <div class="step-content">
+                    <div class="step-title">Transporte Interno hasta Caucasia</div>
+                    <div class="step-desc">Desde Puerto Antioquia: ~4 horas (280 km). Desde Buenaventura: ~12 horas (750 km). Equipos de más de 30 toneladas requieren permiso de carga especial ante el Ministerio de Transporte.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>⛏️ Operación de Minería de Aluvión</h3>
+        <div class="guide-section">
+            <h4>🔎 Proceso técnico básico</h4>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <div class="gc-icon">1️⃣</div>
+                    <div class="gc-title">Prospección</div>
+                    <div class="gc-text">Análisis geológico del cauce. Toma de muestras de grava aurífera. Determinación de leyes (gr/m³).</div>
+                </div>
+                <div class="guide-card">
+                    <div class="gc-icon">2️⃣</div>
+                    <div class="gc-title">Excavación</div>
+                    <div class="gc-text">La retroexcavadora extrae la grava del lecho del río o terrazas aluviales.</div>
+                </div>
+                <div class="guide-card">
+                    <div class="gc-icon">3️⃣</div>
+                    <div class="gc-title">Clasificación</div>
+                    <div class="gc-text">El trommel separa gravas gruesas. El material fino pasa al canal de canaletas (sluice box).</div>
+                </div>
+                <div class="guide-card">
+                    <div class="gc-icon">4️⃣</div>
+                    <div class="gc-title">Concentración</div>
+                    <div class="gc-text">Las canaletas con alfombras atrampan el oro por su mayor densidad (19.3 gr/cm³).</div>
+                </div>
+                <div class="guide-card">
+                    <div class="gc-icon">5️⃣</div>
+                    <div class="gc-title">Amalgamación / Smelting</div>
+                    <div class="gc-text">Proceso de fundición para obtener el doré (mezcla oro-plata lista para venta).</div>
+                </div>
+                <div class="guide-card">
+                    <div class="gc-icon">6️⃣</div>
+                    <div class="gc-title">Comercialización</div>
+                    <div class="gc-text">Venta a compradores locales certificados o a comercializadores reportados ante la DIAN/UIAF.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🌡️ Adaptaciones para Clima Tropical</h3>
+        <div class="tip-grid">
+            <div class="tip-card">
+                <div class="tip-icon">🌡️</div>
+                <div class="tip-title">Refrigeración Reforzada</div>
+                <div class="tip-text">Exija radiadores de alta capacidad (+30%) y ventilación adicional. Temperatura media en Caucasia: 28–35°C.</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">💧</div>
+                <div class="tip-title">Sellos Impermeables</div>
+                <div class="tip-text">Todo el cableado y tableros eléctricos deben tener protección IP67 mínimo para ambientes húmedos.</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">🦟</div>
+                <div class="tip-title">Protección Anticorrosión</div>
+                <div class="tip-text">Pintura epoxi marina en estructuras metálicas. El ambiente fluvial acelera la corrosión galvánica.</div>
+            </div>
+            <div class="tip-card">
+                <div class="tip-icon">⛽</div>
+                <div class="tip-title">Combustible</div>
+                <div class="tip-text">ACPM (diésel) de la zona puede tener impurezas. Instale filtros de combustible adicionales de alta eficiencia.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════ SECCIÓN 5: NORMATIVA ══════════════════ -->
+<section class="section animate-in" id="sec-normativa">
+    <div class="section-title"><span class="icon">⚖️</span> Marco Legal</div>
+    <div class="section-subtitle">Normativa minera y de importación vigente en Colombia</div>
+
+    <div class="card">
+        <h3>📋 Legislación Minera</h3>
+        <div class="norm-item">
+            <div class="norm-title">Código de Minas — Ley 685 de 2001</div>
+            <div class="norm-desc">Marco general de la actividad minera en Colombia. Regula los títulos mineros, regalías (4% para oro), y las obligaciones ambientales. Sin título minero otorgado por la ANM, toda extracción es minería ilegal.</div>
+        </div>
+        <div class="norm-item warning">
+            <div class="norm-title">⚠️ Minería Ilegal — Ley 1658 de 2013 y Ley 2041 de 2020</div>
+            <div class="norm-desc">La explotación sin título minero vigente constituye delito penal con penas de 2 a 8 años de prisión y multas desde 50 a 1.000 SMMLV. La maquinaria es sujeto de decomiso definitivo por autoridades (Fiscalía + Fuerza Pública).</div>
+        </div>
+        <div class="norm-item">
+            <div class="norm-title">Decreto 1073 de 2015 — Sector Minero-Energético</div>
+            <div class="norm-desc">Compilación normativa del sector. Reglamenta el Registro Único de Comercializadores de Minerales (RUCOM), obligatorio para vender oro legalmente en Colombia.</div>
+        </div>
+        <div class="norm-item info">
+            <div class="norm-title">📋 Resolución 40800 de 2018 — Registro DIAN de Operaciones</div>
+            <div class="norm-desc">Los compradores de oro deben reportar operaciones ante la UIAF (Unidad de Información y Análisis Financiero) por temas de lavado de activos. El comprador le pedirá su título minero o registro ante la ANM.</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🛃 Normativa Aduanera de Importación</h3>
+        <div class="norm-item">
+            <div class="norm-title">Decreto 1165 de 2019 — Régimen de Aduanas DIAN</div>
+            <div class="norm-desc">Regula el proceso de importación de bienes. La maquinaria pesada debe declararse bajo modalidad de importación ordinaria. Define el proceso de aforo físico, documental, y automático.</div>
+        </div>
+        <div class="norm-item warning">
+            <div class="norm-title">⚠️ Decreto 0264 de 2023 — Arancel 35% Estructuras Acero</div>
+            <div class="norm-desc">Medida de protección a la industria siderúrgica nacional. Aplica a posiciones arancelarias 7308.XX (estructuras metálicas). Las barcazas y chasis de acero pueden quedar gravados con este arancel si no se clasifica correctamente.</div>
+        </div>
+        <div class="norm-item">
+            <div class="norm-title">Resolución DIAN 000046 de 2019 — GPS en Maquinaria</div>
+            <div class="norm-desc">La Policía Nacional y el RUNT exigen registro de maquinaria amarilla con dispositivo GPS activo. Obligatorio para operar legalmente en vías colombianas. El incumplimiento genera inmovilización del equipo.</div>
+        </div>
+        <div class="norm-item info">
+            <div class="norm-title">ℹ️ Licencia Ambiental — Decreto 1076 de 2015</div>
+            <div class="norm-desc">Proyectos mineros requieren Estudio de Impacto Ambiental (EIA) ante la Corporación Autónoma Regional competente (CORANTIOQUIA para el Bajo Cauca). El proceso toma entre 6 y 18 meses.</div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>📍 Pasos Legales Recomendados</h3>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-title">Solicitar Título Minero ante ANM</div>
+                    <div class="step-desc">En ventanilla única en www.anm.gov.co. Verifique que el área de interés no esté traslapada con otro título, área protegida, o zona excluible. Proceso: 3–12 meses.</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-title">Obtener Licencia Ambiental</div>
+                    <div class="step-desc">Contrate un consultor ambiental para elaborar el EIA. Presente ante CORANTIOQUIA (Caucasia). No se puede explotar sin licencia ambiental aunque tenga título minero.</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-title">Inscribirse en el RUCOM</div>
+                    <div class="step-desc">Registro Único de Comercializadores de Minerales. Obligatorio para comprar y vender oro legalmente. Trámite ante el Ministerio de Minas y Energía.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════ SECCIÓN 6: PROVEEDORES ══════════════════ -->
+<section class="section animate-in" id="sec-proveedores">
+    <div class="section-title"><span class="icon">🌏</span> Proveedores Recomendados</div>
+    <div class="section-subtitle">Fabricantes y plataformas para importación directa</div>
+
+    <div class="card">
+        <h3>🇨🇳 Fabricantes en China</h3>
+
+        <div class="supplier-card">
+            <div class="sup-header">
+                <div class="sup-name">SANY Heavy Industry</div>
+                <div class="sup-country">🇨🇳 CHINA</div>
+            </div>
+            <div class="sup-desc">Uno de los 3 mayores fabricantes de maquinaria pesada del mundo. Excavadoras SY series ampliamente usadas en Colombia. Cuentan con distribuidor oficial en Medellín y repuestos disponibles.</div>
+            <div class="sup-tags">
+                <span class="spec-tag">Excavadoras</span>
+                <span class="spec-tag">Volquetas</span>
+                <span class="spec-tag">ISO 9001</span>
+                <span class="spec-tag">Distribuidor Colombia</span>
+            </div>
+        </div>
+
+        <div class="supplier-card">
+            <div class="sup-header">
+                <div class="sup-name">XCMG Group</div>
+                <div class="sup-country">🇨🇳 CHINA</div>
+            </div>
+            <div class="sup-desc">Especialistas en equipos de construcción y minería. Sus trommels TR series son populares en el Bajo Cauca. Precio FOB generalmente 20–30% menor que marcas occidentales.</div>
+            <div class="sup-tags">
+                <span class="spec-tag">Trommels</span>
+                <span class="spec-tag">Retroexcavadoras</span>
+                <span class="spec-tag">Plantas</span>
+            </div>
+        </div>
+
+        <div class="supplier-card">
+            <div class="sup-header">
+                <div class="sup-name">Ganzhou Gelin Mining Machinery</div>
+                <div class="sup-country">🇨🇳 CHINA</div>
+            </div>
+            <div class="sup-desc">Especialista en equipos de procesamiento de oro. Trommels, mesas de concentración, molinos de bolas. Excelente relación precio-calidad para operaciones medianas en aluvión.</div>
+            <div class="sup-tags">
+                <span class="spec-tag">Trommels Aluvión</span>
+                <span class="spec-tag">Sluice Box</span>
+                <span class="spec-tag">Concentración</span>
+            </div>
+        </div>
+
+        <div class="supplier-card">
+            <div class="sup-header">
+                <div class="sup-name">Shanghai Dredging Equipment</div>
+                <div class="sup-country">🇨🇳 CHINA</div>
+            </div>
+            <div class="sup-desc">Dragas y bombas de succión para ríos y lagunas. Sus dragas de cortador (cutter suction dredger) son ideales para depósitos aluviales profundos en el Cauca y Nechí.</div>
+            <div class="sup-tags">
+                <span class="spec-tag">Dragas</span>
+                <span class="spec-tag">Bombas Aluvión</span>
+                <span class="spec-tag">Río</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🛒 Plataformas de Compra</h3>
+        <div class="guide-grid">
+            <div class="guide-card">
+                <div class="gc-icon">🔶</div>
+                <div class="gc-title">Alibaba.com</div>
+                <div class="gc-text">La mayor plataforma B2B del mundo. Busque proveedores con insignia "Gold Supplier" y verificación de terceros. Use Trade Assurance para proteger su pago.</div>
+            </div>
+            <div class="guide-card">
+                <div class="gc-icon">🔷</div>
+                <div class="gc-title">Made-in-China.com</div>
+                <div class="gc-text">Alternativa a Alibaba. Mayor especialización en maquinaria industrial y minera. Los proveedores suelen tener catálogos técnicos más detallados.</div>
+            </div>
+            <div class="guide-card">
+                <div class="gc-icon">🔴</div>
+                <div class="gc-title">Global Sources</div>
+                <div class="gc-text">Plataforma con proveedores verificados in situ. Ideal para equipos de alto valor donde se requiere mayor due diligence del proveedor.</div>
+            </div>
+            <div class="guide-card">
+                <div class="gc-icon">🟢</div>
+                <div class="gc-title">Ferias en Canton Fair</div>
+                <div class="gc-text">La mayor feria de exportaciones del mundo (Guangzhou, 2 veces al año). Permite conocer fabricantes directamente y negociar precios sin intermediarios.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>🇨🇴 Contactos Logísticos Colombia</h3>
+        <div class="norm-item info">
+            <div class="norm-title">Puerto Antioquia (Urabá Antioqueño)</div>
+            <div class="norm-desc">Puerto de entrada recomendado para Caucasia. Distancia: 280 km. Tiempo transporte: 4–5 horas. Agentes recomendados: consulte la Asociación Colombiana de Agentes de Aduana (ASONAV) para listado actualizado.</div>
+        </div>
+        <div class="norm-item">
+            <div class="norm-title">Agentes de Aduana Autorizados DIAN</div>
+            <div class="norm-desc">Consulte el listado oficial en www.dian.gov.co → Comercio Exterior → Agentes de Aduana. Solo contrate agentes con habilitación DIAN vigente. El costo promedio por despacho es entre USD 600–1.500 dependiendo del valor de la mercancía.</div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════ SECCIÓN 7: EMAIL ══════════════════ -->
+<section class="section animate-in" id="sec-email">
+    <div class="section-title"><span class="icon">✉️</span> Generador de Cotización</div>
+    <div class="section-subtitle">Correo profesional en inglés para fábricas chinas</div>
+
+    <div class="card">
+        <h3>Datos de tu Consulta</h3>
+        <div class="form-group">
+            <label>Tipo de Equipo a Cotizar</label>
+            <select id="emailEquipo">
+                <option value="trommel">Trommel (Washing Plant) para Aluvión</option>
+                <option value="excavadora">Excavadora / Retroexcavadora</option>
+                <option value="draga">Draga de Succión / Cutter Dredger</option>
+                <option value="bomba">Bomba de Dragado de Alta Presión</option>
+                <option value="planta">Planta Eléctrica Diésel</option>
+                <option value="compresor">Compresor Industrial</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Capacidad / Tonelaje Requerido</label>
+                <input type="text" id="emailCapacidad" placeholder="Ej: 50 ton/hour, 20T, 200 m³/h">
+            </div>
+            <div class="form-group">
+                <label>Tu Nombre / Empresa</label>
+                <input type="text" id="emailNombre" placeholder="Ej: Marleny García">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Notas Adicionales (Opcional)</label>
+            <textarea id="emailNotas" rows="2" placeholder="Clima tropical, necesito repuestos 1 año, pago L/C..."></textarea>
+        </div>
+        <button class="btn btn-gold" onclick="generateEmail()">✉️ Generar Correo de Cotización</button>
+
+        <div class="email-box hidden" id="email-section"></div>
+        <button class="btn-copy hidden" id="btn-copy-email" onclick="copyEmail()">📋 Copiar Correo al Portapapeles</button>
+    </div>
+
+    <div class="card">
+        <h3>💡 Consejos para Negociar con Fábricas Chinas</h3>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-num">1</div>
+                <div class="step-content">
+                    <div class="step-title">Pida siempre 3 cotizaciones de fábricas distintas</div>
+                    <div class="step-desc">Compare especificaciones técnicas (no solo precio). Un trommel puede costar desde USD 8.000 hasta USD 80.000 con calidades muy diferentes.</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">2</div>
+                <div class="step-content">
+                    <div class="step-title">Exija video de prueba antes del envío</div>
+                    <div class="step-desc">Solicite un video de la máquina funcionando con su serial visible. Mejor aún, contrate una inspección de terceros (SGS, Bureau Veritas, o similar) en la fábrica.</div>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">3</div>
+                <div class="step-content">
+                    <div class="step-title">Negocie repuestos de primer año incluidos</div>
+                    <div class="step-desc">Pida que incluyan en el contenedor: filtros, correas, sellos, rodamientos y un juego de desgaste (liners). El mantenimiento preventivo en Caucasia con piezas chinas es mucho más barato que importar después.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════════ SECCIÓN 8: GLOSARIO ══════════════════ -->
+<section class="section animate-in" id="sec-glosario">
+    <div class="section-title"><span class="icon">📖</span> Glosario Técnico</div>
+    <div class="section-subtitle">Términos clave para entender el negocio</div>
+
+    <div class="card" id="glossary-container"></div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>Desarrollado por <strong>Vibras Positivas HM</strong> &copy; 2026 — Caucasia, Antioquia</p>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
